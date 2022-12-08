@@ -1,0 +1,72 @@
+
+.main{
+  height: 100%;
+  display: grid;
+  justify-items: center;
+  grid-gap: 1em;
+  background-color: black;
+  align-content: space-around;
+  grid-auto-columns: minmax(auto,auto);
+  grid-auto-rows: minmax(auto,auto);
+}
+.calc{
+  width: 460px;
+  display: grid;
+  background-color: #ffffff;
+  justify-items: center;
+  grid-gap: 1em;
+  margin: 1em;
+}
+.size{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 90%;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 1em;
+}
+.size_input{
+  width: 100%;
+}
+.size_input2{
+  width: 96%;
+}
+.name{
+
+}
+.type{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 90%;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.result{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 440px;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+.input_range{
+  width:70px;
+  margin: 3px;
+}
+.input_range2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: right;
+}
+.range{
+  display: grid;
+  width: 90%;
+  grid-template-columns: 2fr 1fr 1fr;
+  margin-left: 1em;
+  margin-right: 1em;
+
+}
+.result_label{
+  overflow-wrap: break-word;
+  width: 212px;
+}
