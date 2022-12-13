@@ -2,6 +2,8 @@ package com.example.calculatearrayspring;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -16,7 +18,54 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 @RequestMapping("/calc/")
 public class CalculateController {
 
-
+    public  void fileSave(BigInteger arr[]){
+        try(FileWriter writer = new FileWriter("C:\\Users\\Artem\\Desktop\\semenov\\1.txt", false))
+        {
+            writer.write("");
+            for(int j=0;j< arr.length;j++){
+                writer.append(arr[j].toString());
+                writer.append('\n');
+            }
+        }
+        catch(IOException ex){
+        }
+    }
+    public  void fileSave(BigDecimal arr[]){
+        try(FileWriter writer = new FileWriter("C:\\Users\\Artem\\Desktop\\semenov\\1.txt", false))
+        {
+            writer.write("");
+            for(int j=0;j< arr.length;j++){
+                writer.append(arr[j].toString());
+                writer.append('\n');
+            }
+        }
+        catch(IOException ex){
+        }
+    }
+    public  void fileSave(Short arr[]){
+        try(FileWriter writer = new FileWriter("C:\\Users\\Artem\\Desktop\\semenov\\1.txt", false))
+        {
+            writer.write("");
+            for(int j=0;j< arr.length;j++){
+                writer.append(arr[j].toString());
+                writer.append('\n');
+            }
+        }
+        catch(IOException ex){
+        }
+    }
+    public  void fileSave(Double arr[]){
+        try(FileWriter writer = new FileWriter("C:\\Users\\Artem\\Desktop\\semenov\\1.txt", false))
+        {
+            writer.write("");
+            for(int j=0;j< arr.length;j++){
+                writer.append(arr[j].toString());
+                writer.append('\n');
+            }
+        }
+        catch(IOException ex){
+        }
+    }
 
     public Response calcgetInt( Number num) throws Exception{
         if(num.getOperation()==0){
@@ -28,6 +77,7 @@ public class CalculateController {
                 res=res.add((arr[i]));
             }
             time = System.nanoTime() - time;
+            fileSave(arr);
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -43,6 +93,8 @@ public class CalculateController {
                 res=res.subtract(arr[i]);
             }
             time = System.nanoTime() - time;
+            fileSave(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -58,6 +110,8 @@ public class CalculateController {
                 res=res.multiply((arr[i]));
             }
             time = System.nanoTime() - time;
+            fileSave(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -73,6 +127,8 @@ public class CalculateController {
                 res=res.divide((arr[i]), 100, RoundingMode.HALF_UP);
             }
             time = System.nanoTime() - time;
+            fileSave(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -88,9 +144,12 @@ public class CalculateController {
             long time = System.nanoTime();
             for (int i = 0; i <arr.length; i++) {
                 arr[i] = (short)Math.round(num.getStart() + Math.random()*(num.getFinish()-1));
+                System.out.println(arr[i]);
                 res+=(arr[i]);
             }
             time = System.nanoTime() - time;
+            fileSaveShort(arr);
+
             Response resp= new Response();
             resp.setResult(Integer.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -106,6 +165,8 @@ public class CalculateController {
                 res-=(arr[i]);
             }
             time = System.nanoTime() - time;
+            fileSaveShort(arr);
+
             Response resp= new Response();
             resp.setResult(Integer.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -123,6 +184,8 @@ public class CalculateController {
                 short asd3=(short)(asd*i);
             }
             time = System.nanoTime() - time;
+            fileSaveShort(arr);
+
             Response resp= new Response();
             resp.setResult(Integer.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -138,6 +201,8 @@ public class CalculateController {
                 res=res.divide(BigDecimal.valueOf(arr[i]), 100, RoundingMode.HALF_UP);
             }
             time = System.nanoTime() - time;
+            fileSaveShort(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -158,6 +223,8 @@ public class CalculateController {
                 res=res.add((arr[i]));
             }
             time = System.nanoTime() - time;
+            fileSaveShort(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -175,6 +242,8 @@ public class CalculateController {
                 res=res.subtract((arr[i]));
             }
             time = System.nanoTime() - time;
+            fileSaveShort(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -192,6 +261,8 @@ public class CalculateController {
                 res=res.multiply((arr[i]));
             }
             time = System.nanoTime() - time;
+            fileSaveShort(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -211,6 +282,8 @@ public class CalculateController {
                 res=res.divide((arr[i]), 100, RoundingMode.HALF_UP);
             }
             time = System.nanoTime() - time;
+            fileSaveShort(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -232,6 +305,8 @@ public class CalculateController {
                 res+=arr[i];
             }
             time = System.nanoTime() - time;
+            fileSaveDouble(arr);
+
             Response resp= new Response();
             resp.setResult(Float.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -249,6 +324,8 @@ public class CalculateController {
                 res-=(arr[i]);
             }
             time = System.nanoTime() - time;
+            fileSaveDouble(arr);
+
             Response resp= new Response();
             resp.setResult(Float.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -266,6 +343,8 @@ public class CalculateController {
                 res*=(arr[i]);
             }
             time = System.nanoTime() - time;
+            fileSaveDouble(arr);
+
             Response resp= new Response();
             resp.setResult(Float.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -285,6 +364,8 @@ public class CalculateController {
                 res/=(arr[i]);
             }
             time = System.nanoTime() - time;
+            fileSaveDouble(arr);
+
             Response resp= new Response();
             resp.setResult(Float.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -337,6 +418,8 @@ public class CalculateController {
                 res=res.add((arr.get(i)));
             }
             time = System.nanoTime() - time;
+            fileSaveList(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -352,6 +435,8 @@ public class CalculateController {
                 res=res.subtract((arr.get(i)));
             }
             time = System.nanoTime() - time;
+            fileSaveList(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -367,6 +452,8 @@ public class CalculateController {
                 res=res.multiply((arr.get(i)));
             }
             time = System.nanoTime() - time;
+            fileSaveList(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -382,6 +469,8 @@ public class CalculateController {
                 res=res.divide(BigDecimal.valueOf(arr[i]), 100, RoundingMode.HALF_UP);
             }
             time = System.nanoTime() - time;
+            fileSaveList(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -400,6 +489,8 @@ public class CalculateController {
                 res+=(arr.get(i));
             }
             time = System.nanoTime() - time;
+            fileSaveShortList(arr);
+
             Response resp= new Response();
             resp.setResult(Integer.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -415,6 +506,8 @@ public class CalculateController {
                 res-=(arr.get(i));
             }
             time = System.nanoTime() - time;
+            fileSaveShortList(arr);
+
             Response resp= new Response();
             resp.setResult(Integer.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -430,6 +523,8 @@ public class CalculateController {
                 res*=(arr.get(i));
             }
             time = System.nanoTime() - time;
+            fileSaveShortList(arr);
+
             Response resp= new Response();
             resp.setResult(Integer.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -445,6 +540,8 @@ public class CalculateController {
                 res=res.divide(BigDecimal.valueOf(arr[i]), 100, RoundingMode.HALF_UP);
             }
             time = System.nanoTime() - time;
+            fileSaveShortList(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -466,6 +563,8 @@ public class CalculateController {
                 res=res.add((arr.get(i)));
             }
             time = System.nanoTime() - time;
+            fileSaveDecList(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -483,6 +582,8 @@ public class CalculateController {
                 res=res.subtract((arr.get(i)));
             }
             time = System.nanoTime() - time;
+            fileSaveDecList(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -500,6 +601,8 @@ public class CalculateController {
                 res=res.multiply((arr.get(i)));
             }
             time = System.nanoTime() - time;
+            fileSaveDecList(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -519,6 +622,8 @@ public class CalculateController {
                 res=res.divide((arr.get(i)), 100, RoundingMode.HALF_UP);
             }
             time = System.nanoTime() - time;
+            fileSaveDecList(arr);
+
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -540,6 +645,8 @@ public class CalculateController {
                 res+=arr.get(i);
             }
             time = System.nanoTime() - time;
+            fileSaveDList(arr);
+
             Response resp= new Response();
             resp.setResult(Float.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -557,6 +664,8 @@ public class CalculateController {
                 res-=(arr.get(i));
             }
             time = System.nanoTime() - time;
+            fileSaveDList(arr);
+
             Response resp= new Response();
             resp.setResult(Float.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -574,6 +683,8 @@ public class CalculateController {
                 res*=(arr.get(i));
             }
             time = System.nanoTime() - time;
+            fileSaveDList(arr);
+
             Response resp= new Response();
             resp.setResult(Float.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
@@ -593,6 +704,8 @@ public class CalculateController {
                 res/=(arr.get(i));
             }
             time = System.nanoTime() - time;
+            fileSaveDList(arr);
+
             Response resp= new Response();
             resp.setResult(Float.toString(res)+"  .");
             BigDecimal res12 =  BigDecimal .valueOf(NANOSECONDS.convert(time, NANOSECONDS));
