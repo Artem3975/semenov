@@ -15,7 +15,7 @@ function App() {
     const [typeVarFloat, setTypeVarFloat] = useState({ value: 0, label: 'BigDecimal' });
     const [typeVarInt, setTypeVarInt] = useState({ value: 0, label: 'BigInteger' });
     const [type, setType] = useState({ value: 0, label: 'Целые числа' });
-    const [precision, setPrecision] = useState( { value: 1, label: '1 знак после запятой' });
+    const [precision, setPrecision] = useState( 1);
     const [wait, setWait] = useState(0);
     const options = [
         { value: 0, label: 'Целые числа' },
@@ -53,7 +53,7 @@ function App() {
 
     const calculate = () =>{
 
-        Service.calculateget(size,rangeStart,rangeFinish,type.value,precision.value,operation.value,typeArray.value,typeVarFloat.value,typeVarInt.value).then(
+        Service.calculateget(size,rangeStart,rangeFinish,type.value,precision,operation.value,typeArray.value,typeVarFloat.value,typeVarInt.value).then(
             response => {
             console.log(response.data);
             setResult(response.data.result);
@@ -180,16 +180,13 @@ function App() {
           }
           {type.value ? (
               <div className={"type"}>
-                  <div className={"name"}>
-                      <label>Точность чисел </label>
-                  </div>
-                  <div className={"size_input"}>
-                      <Select
-                          defaultValue={precision}
-                          options={precisionDouble}
-                          onChange={setPrecision}
-                      />
-                  </div>
+                  <input  type="number"
+                          id="size"
+                      //nClick={(event) => event.target.select()}
+                          className={"size_input2"}
+                          value={precision}
+                          onChange={(event) => setPrecision(event.target.value)}
+                  />
               </div >
           ):(null) }
 

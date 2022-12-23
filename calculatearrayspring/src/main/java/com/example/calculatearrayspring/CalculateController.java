@@ -9,6 +9,7 @@ import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
@@ -23,43 +24,99 @@ public class CalculateController {
         {
             writer.write("");
             for(int j=0;j< arr.length;j++){
-                writer.append(arr[j].toString());
+                String str= ""+arr[j];
+
+                writer.append(str);
                 writer.append('\n');
             }
         }
         catch(IOException ex){
         }
     }
-    public  void fileSave(BigDecimal arr[]){
+    public  void fileSaveDec(BigDecimal arr[]){
         try(FileWriter writer = new FileWriter("C:\\Users\\Artem\\Desktop\\semenov\\1.txt", false))
         {
             writer.write("");
             for(int j=0;j< arr.length;j++){
-                writer.append(arr[j].toString());
+                String str= ""+arr[j];
+
+                writer.append(str);
                 writer.append('\n');
             }
         }
         catch(IOException ex){
         }
     }
-    public  void fileSave(Short arr[]){
+    public  void fileSaveShort(short arr[]){
         try(FileWriter writer = new FileWriter("C:\\Users\\Artem\\Desktop\\semenov\\1.txt", false))
         {
             writer.write("");
             for(int j=0;j< arr.length;j++){
-                writer.append(arr[j].toString());
+                String str= ""+arr[j];
+
+                writer.append(str);
                 writer.append('\n');
             }
         }
         catch(IOException ex){
         }
     }
-    public  void fileSave(Double arr[]){
+    public  void fileSaveDouble(float arr[]){
         try(FileWriter writer = new FileWriter("C:\\Users\\Artem\\Desktop\\semenov\\1.txt", false))
         {
             writer.write("");
             for(int j=0;j< arr.length;j++){
-                writer.append(arr[j].toString());
+                String str= ""+arr[j];
+
+                writer.append(str);
+                writer.append('\n');
+            }
+        }
+        catch(IOException ex){
+        }
+    }
+    public  void fileSaveList(List arr){
+        try(FileWriter writer = new FileWriter("C:\\Users\\Artem\\Desktop\\semenov\\1.txt", false))
+        {
+            writer.write("");
+            for(int j=0;j< arr.size();j++){
+                writer.append(arr.get(j).toString());
+                writer.append('\n');
+            }
+        }
+        catch(IOException ex){
+        }
+    }
+    public  void fileSaveDecList(List arrList){
+        try(FileWriter writer = new FileWriter("C:\\Users\\Artem\\Desktop\\semenov\\1.txt", false))
+        {
+            writer.write("");
+            for(int j=0;j< arrList.size();j++){
+                writer.append(arrList.get(j).toString());
+                writer.append('\n');
+            }
+        }
+        catch(IOException ex){
+        }
+    }
+    public  void fileSaveShortList(List arr){
+        try(FileWriter writer = new FileWriter("C:\\Users\\Artem\\Desktop\\semenov\\1.txt", false))
+        {
+            writer.write("");
+            for(int j=0;j< arr.size();j++){
+                writer.append(arr.get(j).toString());
+                writer.append('\n');
+            }
+        }
+        catch(IOException ex){
+        }
+    }
+    public  void fileSaveDList(List arr){
+        try(FileWriter writer = new FileWriter("C:\\Users\\Artem\\Desktop\\semenov\\1.txt", false))
+        {
+            writer.write("");
+            for(int j=0;j< arr.size();j++){
+                writer.append(arr.get(j).toString());
                 writer.append('\n');
             }
         }
@@ -127,7 +184,7 @@ public class CalculateController {
                 res=res.divide((arr[i]), 100, RoundingMode.HALF_UP);
             }
             time = System.nanoTime() - time;
-            fileSave(arr);
+            fileSaveDec(arr);
 
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
@@ -194,10 +251,10 @@ public class CalculateController {
             return resp;
         }else {
             BigDecimal res =  BigDecimal.valueOf(Math.round(num.getStart() + Math.random()*(num.getFinish()-1)));
-            double arr[] =  new double[num.getSize()];
+            short arr[] =  new short[num.getSize()];
             long time = System.nanoTime();
             for (int i = 0; i <arr.length; i++) {
-                arr[i] = Math.round(num.getStart() + Math.random()*(num.getFinish()-1));
+                arr[i] = (short)Math.round(num.getStart() + Math.random()*(num.getFinish()-1));
                 res=res.divide(BigDecimal.valueOf(arr[i]), 100, RoundingMode.HALF_UP);
             }
             time = System.nanoTime() - time;
@@ -214,16 +271,53 @@ public class CalculateController {
     public Response calcgetDouble( Number num) throws Exception{
         if(num.getOperation()==0){
             BigDecimal res =  BigDecimal .valueOf(0);
+            System.out.println("asfafaffasffwewfwefeewwtwwewtyweyewffgnmfgmgfmng");
             BigDecimal arr[] =  new BigDecimal[num.getSize()];
             long time = System.nanoTime();
             for (int i = 0; i <arr.length; i++) {
-                double asd=num.getStart() + Math.random()*(num.getFinish()-1);
-                String firstResult = String.format("%."+num.getPrecision()+"f",asd);
-                arr[i] = BigDecimal.valueOf(Double.parseDouble(firstResult.replace(',', '.')));
+             //   BigDecimal asd=BigDecimal.valueOf(num.getStart() + Math.random()*(num.getFinish()-0.9));
+
+
+                Long pre =num.getPrecision();
+                boolean tochBool =true;
+                BigDecimal min=BigDecimal.valueOf(num.getStart());
+                BigDecimal max2=BigDecimal.valueOf(num.getFinish());
+                BigDecimal randomBigDecimal = min.add(new BigDecimal(Math.random()).multiply(max2.subtract(min)));
+                String decim="";
+                while (tochBool){
+                    if(pre>40){
+                        randomBigDecimal = min.add(new BigDecimal(Math.random()).multiply(max2.subtract(min)));
+                        String firstResult = String.format("%."+40+"f",randomBigDecimal);
+                        if(decim.equals("")){
+                            decim=firstResult;
+                        }else{
+                            String[] words = firstResult.split(",");
+                            decim=decim+words[1];
+                        }
+                        pre-=40;
+                    }else {
+                        if(decim.equals("")){
+                            String firstResult = String.format("%."+pre+"f",randomBigDecimal);
+                            decim=firstResult;
+                        }else {
+                            randomBigDecimal = min.add(new BigDecimal(Math.random()).multiply(max2.subtract(min)));
+                            String firstResult = String.format("%."+pre+"f",randomBigDecimal);
+                            String[] words = firstResult.split(",");
+                            decim=decim+words[1];
+                        }
+                        tochBool=false;
+                    }
+                }
+
+
+                //String firstResult = String.format("%."+num.getPrecision()+"f",asd);
+                decim.replace(',', '.');
+                BigDecimal bigDecimal2 = new BigDecimal(decim.replace(',', '.').toString()+"0");
+                arr[i] = bigDecimal2;
                 res=res.add((arr[i]));
             }
             time = System.nanoTime() - time;
-            fileSaveShort(arr);
+            fileSaveDec(arr);
 
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
@@ -236,13 +330,13 @@ public class CalculateController {
             BigDecimal arr[] =  new BigDecimal[num.getSize()];
             long time = System.nanoTime();
             for (int i = 0; i <arr.length; i++) {
-                double asd=num.getStart() + Math.random()*(num.getFinish()-1);
+                double asd=num.getStart() + Math.random()*(num.getFinish()-0.9);
                 String firstResult = String.format("%."+num.getPrecision()+"f",asd);
                 arr[i] = BigDecimal.valueOf(Double.parseDouble(firstResult.replace(',', '.')));
                 res=res.subtract((arr[i]));
             }
             time = System.nanoTime() - time;
-            fileSaveShort(arr);
+            fileSaveDec(arr);
 
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
@@ -255,13 +349,13 @@ public class CalculateController {
             BigDecimal arr[] =  new BigDecimal[num.getSize()];
             long time = System.nanoTime();
             for (int i = 0; i <arr.length; i++) {
-                double asd=num.getStart() + Math.random()*(num.getFinish()-1);
+                double asd=num.getStart() + Math.random()*(num.getFinish()-0.9);
                 String firstResult = String.format("%."+num.getPrecision()+"f",asd);
                 arr[i] = BigDecimal.valueOf(Double.parseDouble(firstResult.replace(',', '.')));
                 res=res.multiply((arr[i]));
             }
             time = System.nanoTime() - time;
-            fileSaveShort(arr);
+            fileSaveDec(arr);
 
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
@@ -275,14 +369,14 @@ public class CalculateController {
             BigDecimal arr[] =  new BigDecimal[num.getSize()];
             long time = System.nanoTime();
             for (int i = 0; i <arr.length; i++) {
-                double asd=num.getStart() + Math.random()*(num.getFinish()-1);
+                double asd=num.getStart() + Math.random()*(num.getFinish()-0.9);
                 String firstResult = String.format("%."+num.getPrecision()+"f",asd);
                 arr[i] = BigDecimal.valueOf(Double.parseDouble(firstResult.replace(',', '.')));
                 //res=res.divide(BigDecimal.valueOf(arr[i]));
                 res=res.divide((arr[i]), 100, RoundingMode.HALF_UP);
             }
             time = System.nanoTime() - time;
-            fileSaveShort(arr);
+            fileSaveDec(arr);
 
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
@@ -296,12 +390,13 @@ public class CalculateController {
     public Response calcgetFloatDouble( Number num) throws Exception{
         if(num.getOperation()==0){
             float res = 0f;
-            double arr[] =  new double[num.getSize()];
+            float arr[] =  new float[num.getSize()];
             long time = System.nanoTime();
+            System.out.println("asdasdasdasd");
             for (int i = 0; i <arr.length; i++) {
-                double asd=num.getStart() + Math.random()*(num.getFinish()-1);
+                float asd= (float) (num.getStart() + Math.random()*(num.getFinish()-0.9f));
                 String firstResult = String.format("%."+num.getPrecision()+"f",asd);
-                arr[i] = Double.parseDouble(firstResult.replace(',', '.'));
+                arr[i] = asd;
                 res+=arr[i];
             }
             time = System.nanoTime() - time;
@@ -315,12 +410,13 @@ public class CalculateController {
             return resp;
         } else if(num.getOperation()==1){
             float res = 0f;
-            double arr[] =  new double[num.getSize()];
+            float arr[] =  new float[num.getSize()];
+
             long time = System.nanoTime();
             for (int i = 0; i <arr.length; i++) {
-                double asd=num.getStart() + Math.random()*(num.getFinish()-1);
+                float asd= (float) (num.getStart() + Math.random()*(num.getFinish()-0.9f));
                 String firstResult = String.format("%."+num.getPrecision()+"f",asd);
-                arr[i] = Double.parseDouble(firstResult.replace(',', '.'));
+                arr[i] = asd;
                 res-=(arr[i]);
             }
             time = System.nanoTime() - time;
@@ -334,12 +430,12 @@ public class CalculateController {
             return resp;
         }else if(num.getOperation()==2){
             float res =1f;
-            double arr[] =  new double[num.getSize()];
+            float arr[] =  new float[num.getSize()];
             long time = System.nanoTime();
             for (int i = 0; i <arr.length; i++) {
-                double asd=num.getStart() + Math.random()*(num.getFinish()-1);
+                float asd= (float) (num.getStart() + Math.random()*(num.getFinish()-0.9f));
                 String firstResult = String.format("%."+num.getPrecision()+"f",asd);
-                arr[i] = Double.parseDouble(firstResult.replace(',', '.'));
+                arr[i] = asd;
                 res*=(arr[i]);
             }
             time = System.nanoTime() - time;
@@ -354,12 +450,12 @@ public class CalculateController {
             return resp;
         }else {
             float res = 0f;
-            double arr[] =  new double[num.getSize()];
+            float arr[] =  new float[num.getSize()];
             long time = System.nanoTime();
             for (int i = 0; i <arr.length; i++) {
-                double asd=num.getStart() + Math.random()*(num.getFinish()-1);
+                float asd= (float) (num.getStart() + Math.random()*(num.getFinish()-0.9f));
                 String firstResult = String.format("%."+num.getPrecision()+"f",asd);
-                arr[i] = Double.parseDouble(firstResult.replace(',', '.'));
+                arr[i] = asd;
                 //res=res.divide(BigDecimal.valueOf(arr[i]));
                 res/=(arr[i]);
             }
@@ -381,12 +477,13 @@ public class CalculateController {
         try{
             if(num.getType()==0&&num.getTypeArray()==0&&num.getTypeVarInt()==0){
                 return calcgetInt(num);
-            }else if(num.getType()==1&&num.getTypeArray()==0&&num.getTypeVarInt()==0) {
+            }else if(num.getType()==1&&num.getTypeArray()==0&&num.getTypeVarFloat()==0) {
+                System.out.println(num.getTypeVarInt());
                 return calcgetDouble(num);
 
             }if(num.getType()==0&&num.getTypeArray()==0&&num.getTypeVarInt()==1){
                 return calcgetShortInt(num);
-            }else if(num.getType()==1&&num.getTypeArray()==0&&num.getTypeVarInt()==1) {
+            }else if(num.getType()==1&&num.getTypeArray()==0&&num.getTypeVarFloat()==1) {
                 return calcgetFloatDouble(num);
             }
             if(num.getType()==0&&num.getTypeArray()==1&&num.getTypeVarInt()==0){
@@ -462,14 +559,14 @@ public class CalculateController {
             return resp;
         }else {
             BigDecimal res =  BigDecimal.valueOf(Math.round(num.getStart() + Math.random()*(num.getFinish()-1)));
-            double arr[] =  new double[num.getSize()];
+            float arr[] =  new float[num.getSize()];
             long time = System.nanoTime();
             for (int i = 0; i <arr.length; i++) {
                 arr[i] = Math.round(num.getStart() + Math.random()*(num.getFinish()-1));
                 res=res.divide(BigDecimal.valueOf(arr[i]), 100, RoundingMode.HALF_UP);
             }
             time = System.nanoTime() - time;
-            fileSaveList(arr);
+            fileSaveDouble(arr);
 
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
@@ -533,14 +630,14 @@ public class CalculateController {
             return resp;
         }else {
             BigDecimal res =  BigDecimal.valueOf(Math.round(num.getStart() + Math.random()*(num.getFinish()-1)));
-            double arr[] =  new double[num.getSize()];
+            float arr[] =  new float[num.getSize()];
             long time = System.nanoTime();
             for (int i = 0; i <arr.length; i++) {
                 arr[i] = Math.round(num.getStart() + Math.random()*(num.getFinish()-1));
                 res=res.divide(BigDecimal.valueOf(arr[i]), 100, RoundingMode.HALF_UP);
             }
             time = System.nanoTime() - time;
-            fileSaveShortList(arr);
+            fileSaveDouble(arr);
 
             Response resp= new Response();
             resp.setResult(res.toString()+"  .");
